@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct CellModel {
             
         let mainText: CellTexts
         let subtext: String?
         let value: Double
+        let color: UIColor
     }
 
     typealias Cells = [CellModel]

@@ -32,9 +32,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewProtocol {
     func tapCalculateButton() {
 
-        let calculatedViewController = CalculatedViewController(incomeSalary: homeView.incomeSalaryValue, discounts: homeView.discountValue)
+        let calculatedViewController = CalculatedViewController(incomeSalary: homeView.incomeSalaryValue ?? 0, discounts: homeView.discountValue)
         let calculatedNavigationController = UINavigationController(rootViewController: calculatedViewController)
-        
+
 
         navigationController?.present(calculatedNavigationController, animated: true)
     }

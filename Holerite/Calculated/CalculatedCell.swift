@@ -11,7 +11,7 @@ class CalculatedCell: UITableViewCell {
     
     static let identifier = "CalculatedCell"
     
-    var hasSubtext = false
+    var verifySubtext = false
     
     lazy var mainTextLabel: UILabel = {
         let label = UILabel()
@@ -78,7 +78,7 @@ class CalculatedCell: UITableViewCell {
     
     private func configureCell() {
         
-        if hasSubtext {
+        if verifySubtext {
             configureTextAndSubtextLabels()
         } else {
             configureMainTextLabel()
@@ -87,33 +87,19 @@ class CalculatedCell: UITableViewCell {
         configureValueLabel()
     }
     
-    func configure(with cell: CellModel) {
+    func configure(with cell: CellModel, color: UIColor) {
         mainTextLabel.text = cell.mainText.rawValue
         
         valueLabel.text = String(format: "R$ %.2f", cell.value)
+        valueLabel.textColor = color
         
         if let subtext = cell.subtext {
             subtextLabel.text = subtext
             
-            hasSubtext = true
+            verifySubtext = true
         }
         
         configureCell()
     }
-//    
-//    private func configureValueWith(_ style: ValueStyle) {
-//        
-//        switch style {
-//            
-//        case .positive:
-//            valueLabel.textColor = .mainGreen
-//            
-//        case .negative:
-//            valueLabel.textColor = .mainRed
-//            
-//        case .zero:
-//            valueLabel.textColor = .mainGray
-//        }
-//    }
-//    
+
 }

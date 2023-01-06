@@ -44,15 +44,15 @@ class CalculatedViewController: UIViewController {
 extension CalculatedViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return calculatedViewModel.cells?.count ?? 5
+        return calculatedViewModel.populatedCells?.count ?? 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CalculatedCell.identifier, for: indexPath) as? CalculatedCell,
                 
-              let cellConfiguration = calculatedViewModel.cells?[indexPath.row] else { return UITableViewCell() }
+              let cellConfiguration = calculatedViewModel.populatedCells?[indexPath.row] else { return UITableViewCell() }
 
-        cell.configure(with: cellConfiguration)
+        cell.configure(with: cellConfiguration, color: cellConfiguration.color)
 
         return cell
     }

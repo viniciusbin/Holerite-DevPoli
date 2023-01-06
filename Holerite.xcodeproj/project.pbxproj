@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		811E5D582966105300C9A9AF /* CalculatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811E5D572966105300C9A9AF /* CalculatedViewModel.swift */; };
+		8120112F296781F200C0F110 /* CurrencyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120112E296781F200C0F110 /* CurrencyFormat.swift */; };
 		8130248E2965B26500EA200E /* CalculatedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8130248D2965B26500EA200E /* CalculatedCell.swift */; };
 		813024902965BD4900EA200E /* CalculatedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8130248F2965BD4900EA200E /* CalculatedModel.swift */; };
 		81495A892964E6EB00FE21E9 /* CalculatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81495A882964E6EB00FE21E9 /* CalculatedViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		811E5D572966105300C9A9AF /* CalculatedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedViewModel.swift; sourceTree = "<group>"; };
+		8120112E296781F200C0F110 /* CurrencyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormat.swift; sourceTree = "<group>"; };
 		8130248D2965B26500EA200E /* CalculatedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedCell.swift; sourceTree = "<group>"; };
 		8130248F2965BD4900EA200E /* CalculatedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedModel.swift; sourceTree = "<group>"; };
 		81495A882964E6EB00FE21E9 /* CalculatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatedViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				8181CC5D29648EBC005BC19B /* ViewCodable.swift */,
+				8120112E296781F200C0F110 /* CurrencyFormat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				81495A892964E6EB00FE21E9 /* CalculatedViewController.swift in Sources */,
 				8181CC5B29647CC0005BC19B /* HomeViewController.swift in Sources */,
 				81495A8B2964E6FA00FE21E9 /* CalculatedView.swift in Sources */,
+				8120112F296781F200C0F110 /* CurrencyFormat.swift in Sources */,
 				813024902965BD4900EA200E /* CalculatedModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

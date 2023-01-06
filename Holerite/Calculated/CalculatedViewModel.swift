@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol CalculatedViewModelDelegate: AnyObject {
     
@@ -14,7 +15,7 @@ protocol CalculatedViewModelDelegate: AnyObject {
 
 class CalculatedViewModel {
     
-    var cells: Cells?
+    var populatedCells: Cells?
     
     weak var delegate: CalculatedViewModelDelegate?
     
@@ -22,15 +23,21 @@ class CalculatedViewModel {
     
     var IRRFRate = "0%"
     
+    var greenColor = UIColor(red: 66.0/255.0, green: 166.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+    var grayColor = UIColor(red: 142.0/255.0, green: 142.0/255.0, blue: 142.0/255.0, alpha: 1.0)
+    var redColor = UIColor(red: 219.0/255.0, green: 66.0/255.0, blue: 57.0/255.0, alpha: 1.0)
+    
     func calculateNetSalary(income: Double, discounts: Double) {
         
         let discountValueINSS = discountINSS * income
+            
+        
         
         let discountValueIRRF = calculateIRRF(of: income)
         
         let netSalary = income - discounts - discountValueINSS - discountValueIRRF
         
-        generateCells(
+        createCells(
             incomeSalary: income,
             discounts: discounts,
             INSSDiscountValue: discountValueINSS,
@@ -39,28 +46,26 @@ class CalculatedViewModel {
         )
     }
     
-    private func generateCells(
-        incomeSalary: Double,
-        discounts: Double,
-        INSSDiscountValue: Double,
-        IRRFDiscountValue: Double,
-        netSalary: Double
-    ) {
-        cells = [
-            
-            CellModel(mainText: .income, subtext: nil, value: incomeSalary),
-            
-            CellModel(mainText: .discounts, subtext: nil, value: discounts),
-            
-            CellModel(mainText: .discountINSS, subtext: "8%", value: INSSDiscountValue),
-            
-            CellModel(mainText: .discountIRRF, subtext: IRRFRate, value: IRRFDiscountValue),
-            
-            CellModel(mainText: .finalSalary, subtext: nil, value: netSalary)
+    private func createCells(incomeSalary: Double, discounts: Double, INSSDiscountValue: Double, IRRFDiscountValue: Double, netSalary: Double) {
+        var salaryColor: UIColor
+        if netSalary > 0 {
+            salaryColor = greenColor
+        } else if netSalary < 0 {
+            salaryColor = redColor
+            } else {
+                salaryColor = grayColor
+        }
+        populatedCells = [
+            CellModel(mainText: .income, subtext: nil, value: incomeSalary, color: greenColor),
+            CellModel(mainText: .discounts, subtext: nil, value: discounts, color: discounts > 0 ? redColor : grayColor),
+            CellModel(mainText: .discountINSS, subtext: "8%", value: INSSDiscountValue, color: redColor),
+            CellModel(mainText: .discountIRRF, subtext: IRRFRate, value: IRRFDiscountValue, color: IRRFDiscountValue > 0 ? redColor : grayColor),
+            CellModel(mainText: .finalSalary, subtext: nil, value: netSalary, color: salaryColor)
         ]
         
         delegate?.didCalculateNetSalary()
     }
+    
     
     private func calculateIRRF(of incomeSalary: Double) -> Double {
         
@@ -81,6 +86,7 @@ class CalculatedViewModel {
         
         case let salary where salary < 4664.68:
             IRRFRate = "22,5%"
+            
             return incomeSalary * 0.225
             
         default:

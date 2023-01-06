@@ -19,11 +19,11 @@ class HomeView: UIView {
         self.delegate = delegate
     }
     
-    var incomeSalaryValue: Double {
-        if let salaryNumber = Double(incomeTextField.text ?? ""), incomeTextField.text?.isEmpty == false {
+    var incomeSalaryValue: Double? {
+        if let salaryNumber = valueFormatted(), incomeTextField.text?.isEmpty == false {
             return salaryNumber
         }
-        
+
         return 0
     }
     
@@ -43,6 +43,7 @@ class HomeView: UIView {
         textfield.clipsToBounds = true
         textfield.layer.cornerRadius = 4.0
         textfield.layer.borderWidth = 0.1
+//        textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textfield
     }()
     
@@ -54,6 +55,7 @@ class HomeView: UIView {
         textfield.clipsToBounds = true
         textfield.layer.cornerRadius = 4.0
         textfield.layer.borderWidth = 0.1
+//        textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textfield
     }()
     
@@ -70,6 +72,7 @@ class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        incomeTextField.delegate = self
                 
     }
     
@@ -80,7 +83,22 @@ class HomeView: UIView {
     @objc private func tappedCalculateButton() {
         self.delegate?.tapCalculateButton()
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        let currency = textField.text?.currencyInputFormatting()
+            textField.text = currency
 
+    }
+    
+    func valueFormatted() -> Double? {
+        guard let str = incomeTextField.text else {return 0}
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+
+        return Double(truncating: formatter.number(from: str) ?? 0 )
+        
+    }
 }
 
 extension HomeView: ViewCodable {
@@ -120,3 +138,13 @@ extension HomeView: ViewCodable {
     
     
 }
+
+extension HomeView: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let currency = textField.text?.currencyInputFormatting()
+        textField.text = currency
+
+    }
+}
+
+
