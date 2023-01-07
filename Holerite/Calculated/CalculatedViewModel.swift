@@ -30,8 +30,6 @@ class CalculatedViewModel {
     func calculateNetSalary(income: Double, discounts: Double) {
         
         let discountValueINSS = discountINSS * income
-            
-        
         
         let discountValueIRRF = calculateIRRF(of: income)
         
@@ -55,18 +53,19 @@ class CalculatedViewModel {
             } else {
                 salaryColor = grayColor
         }
+        
         populatedCells = [
-            CellModel(mainText: .income, subtext: nil, value: incomeSalary, color: greenColor),
-            CellModel(mainText: .discounts, subtext: nil, value: discounts, color: discounts > 0 ? redColor : grayColor),
-            CellModel(mainText: .discountINSS, subtext: "8%", value: INSSDiscountValue, color: redColor),
-            CellModel(mainText: .discountIRRF, subtext: IRRFRate, value: IRRFDiscountValue, color: IRRFDiscountValue > 0 ? redColor : grayColor),
-            CellModel(mainText: .finalSalary, subtext: nil, value: netSalary, color: salaryColor)
+            CellModel(mainText: .income, subtext: nil, value: incomeSalary, color: greenColor, strikethrough: .normal),
+            CellModel(mainText: .discounts, subtext: nil, value: discounts, color: discounts > 0 ? redColor : grayColor, strikethrough: discounts == 0 ? .strikethroug : .normal),
+            CellModel(mainText: .discountINSS, subtext: "8%", value: INSSDiscountValue, color: redColor, strikethrough: INSSDiscountValue == 0 ? .strikethroug : .normal),
+            CellModel(mainText: .discountIRRF, subtext: IRRFRate, value: IRRFDiscountValue, color: IRRFDiscountValue > 0 ? redColor : grayColor, strikethrough: IRRFDiscountValue == 0 ? .strikethroug : .normal),
+            CellModel(mainText: .finalSalary, subtext: nil, value: netSalary, color: salaryColor, strikethrough: netSalary == 0 ? .strikethroug : .normal)
         ]
         
         delegate?.didCalculateNetSalary()
     }
     
-    
+  
     private func calculateIRRF(of incomeSalary: Double) -> Double {
         
         switch incomeSalary {

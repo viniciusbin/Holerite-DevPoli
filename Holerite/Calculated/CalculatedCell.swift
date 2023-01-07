@@ -10,9 +10,8 @@ import UIKit
 class CalculatedCell: UITableViewCell {
     
     static let identifier = "CalculatedCell"
-    
     var verifySubtext = false
-    
+
     lazy var mainTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,8 +33,6 @@ class CalculatedCell: UITableViewCell {
     lazy var subtextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "8%"
-        
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .lightGray
         label.numberOfLines = 0
@@ -70,7 +67,6 @@ class CalculatedCell: UITableViewCell {
         NSLayoutConstraint.activate([
             mainTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 11),
             mainTextLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
             subtextLabel.topAnchor.constraint(equalTo: mainTextLabel.bottomAnchor, constant: 2),
             subtextLabel.leadingAnchor.constraint(equalTo: mainTextLabel.leadingAnchor)
         ])
@@ -78,28 +74,41 @@ class CalculatedCell: UITableViewCell {
     
     private func configureCell() {
         
-        if verifySubtext {
+        if verifySubtext == true {
             configureTextAndSubtextLabels()
         } else {
             configureMainTextLabel()
         }
-        
         configureValueLabel()
     }
     
     func configure(with cell: CellModel, color: UIColor) {
-        mainTextLabel.text = cell.mainText.rawValue
         
+        mainTextLabel.text = cell.mainText.rawValue
         valueLabel.text = String(format: "R$ %.2f", cell.value)
         valueLabel.textColor = color
+        configureStrikethrough(cell.strikethrough)
         
         if let subtext = cell.subtext {
             subtextLabel.text = subtext
-            
             verifySubtext = true
         }
         
         configureCell()
     }
-
+    
+    func configureStrikethrough(_ test: Strikethrough) {
+        
+        switch test {
+        case .strikethroug:
+            valueLabel.attributedText = valueLabel.text?.strikeThrough()
+            
+        case .normal:
+            break
+            
+        default:
+            valueLabel.text = "nao deu certo"
+                
+        }
+    }
 }

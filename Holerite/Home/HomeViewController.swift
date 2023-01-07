@@ -13,33 +13,28 @@ class HomeViewController: UIViewController {
         let view = HomeView()
         return view
     }()
-
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         title = "Holerite"
         navigationController?.navigationBar.backgroundColor = .white
         homeView.delegate(delegate: self)
     }
-
+    
     override func loadView() {
-
+        
         self.view = homeView
     }
-    
-    
 }
 
 extension HomeViewController: HomeViewProtocol {
     func tapCalculateButton() {
-
-        let calculatedViewController = CalculatedViewController(incomeSalary: homeView.incomeSalaryValue ?? 0, discounts: homeView.discountValue)
+        
+        let calculatedViewController = CalculatedViewController(incomeSalary: homeView.incomeSalaryValue, discounts: homeView.discountValue)
         let calculatedNavigationController = UINavigationController(rootViewController: calculatedViewController)
-
-
         navigationController?.present(calculatedNavigationController, animated: true)
+        
+        homeView.cleanTextfield()
     }
-    
-    
 }
-
-

@@ -14,9 +14,16 @@ struct CellModel {
         let subtext: String?
         let value: Double
         let color: UIColor
+        let strikethrough: Strikethrough
     }
 
     typealias Cells = [CellModel]
+
+enum Strikethrough {
+    
+    case strikethroug
+    case normal
+}
 
 enum CellTexts: String {
     
