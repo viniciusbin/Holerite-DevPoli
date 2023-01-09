@@ -78,7 +78,7 @@ extension CalculatedViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension CalculatedViewController: CalculatedViewModelDelegate {
     
-    func didCalculateNetSalary() {
+    func calculateNetSalary() {
         
         calculatedView?.tableview.reloadData()
     }

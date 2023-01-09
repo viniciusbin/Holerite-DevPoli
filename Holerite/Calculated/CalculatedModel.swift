@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 struct CellModel {
-            
-        let mainText: CellTexts
-        let subtext: String?
-        let value: Double
-        let color: UIColor
-        let strikethrough: Strikethrough
-    }
+    
+    let mainText: CellTexts
+    let subtext: String?
+    let value: Double
+    let color: UIColor
+    let strikethrough: Strikethrough
+}
 
-    typealias Cells = [CellModel]
+typealias Cells = [CellModel]
 
 enum Strikethrough {
     

@@ -33,8 +33,9 @@ extension HomeViewController: HomeViewProtocol {
         
         let calculatedViewController = CalculatedViewController(incomeSalary: homeView.incomeSalaryValue, discounts: homeView.discountValue)
         let calculatedNavigationController = UINavigationController(rootViewController: calculatedViewController)
-        navigationController?.present(calculatedNavigationController, animated: true)
         
         homeView.cleanTextfield()
+        homeView.enableButton()
+        navigationController?.present(calculatedNavigationController, animated: true)
     }
 }

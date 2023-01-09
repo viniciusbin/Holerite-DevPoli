@@ -11,7 +11,7 @@ class CalculatedCell: UITableViewCell {
     
     static let identifier = "CalculatedCell"
     var verifySubtext = false
-
+    
     lazy var mainTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -107,8 +107,8 @@ class CalculatedCell: UITableViewCell {
             break
             
         default:
-            valueLabel.text = "nao deu certo"
-                
+            valueLabel.text = ""
+            
         }
     }
 }
